@@ -1,0 +1,5 @@
+host: localhost
+port: 27017
+db: tc
+allocation_collection: allocations
+resource_collection: resources

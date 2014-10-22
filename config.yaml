@@ -1,0 +1,4 @@
+mongo_plugin: &mongo_plugin
+    module: mongo
+    config: /etc/rtserver/mongo.yaml
+plugin: *mongo_plugin

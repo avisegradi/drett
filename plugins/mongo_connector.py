@@ -19,9 +19,6 @@ from command import regcmd, Command
 import datetime as dt
 
 import logging
-import logging.config
-with open('/etc/rtserver/logging.yaml') as f:
-    logging.config.dictConfig(yaml.load(f))
 logger = logging.getLogger('resrouce_tracker.plugins.mongo')
 
 import pymongo

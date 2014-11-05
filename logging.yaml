@@ -20,11 +20,11 @@ handlers:
         stream: ext://sys.stderr
 
 loggers:
-    resource_tracker:
+    drett_server:
         propagate: false
         level: DEBUG
         handlers: [error]
-    rtclient:
+    drett_client:
         propagate: false
         level: DEBUG
         handlers: [response]

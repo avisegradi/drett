@@ -2,7 +2,7 @@
 # -*- coding: UTF-8 -*-# enable debugging
 
 """
-Resource tracker server
+Resource tracker server; abstract Command implementation.
 
 Copyright (C) 2014 Adam Visegradi
 Author: Adam Visegradi <a.visegradi@gmail.com>
@@ -15,13 +15,7 @@ import yaml
 import datetime as dt
 
 import logging
-import logging.config
-with open('/etc/rtserver/logging.yaml') as f:
-    logging.config.dictConfig(yaml.load(f))
 logger = logging.getLogger('resrouce_tracker')
-
-with open('/etc/rtserver/config.yaml') as f:
-    cfg = yaml.load(f)
 
 _cmds = dict()
 

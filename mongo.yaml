@@ -1,5 +1,5 @@
 host: localhost
 port: 27017
-db: tc
+db: drett
 allocation_collection: allocations
 resource_collection: resources

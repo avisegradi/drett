@@ -9,11 +9,11 @@ License: GPLv3.0
 """
 
 import uuid
-import resourcetracker as rt
+import drett
 
 cloud_measurement_id = str(uuid.uuid4())
 
-rt.start_allocation(
+drett.start_allocation(
         allocation_id=cloud_measurement_id,
         application='rtdemo',
         module=None,
@@ -22,32 +22,32 @@ rt.start_allocation(
 
 try:
     image_id = service.clone_image(original)
-    rt.add_allocated_resource(
+    drett.add_allocated_resource(
             allocation_id=cloud_measurement_id,
             resource_type='image',
             resource_id=image_id)
 
     vm_id = service.start_vm(image_id)
-    rt.add_allocated_resrouce(
+    drett.add_allocated_resrouce(
             allocation_id=cloud_measurement_id,
             resource_type='vm',
             resource_id=vm_id)
 except:
-    rt.allocation_failed(
+    drett.allocation_failed(
             allocation_id=cloud_measurement_id)
     raise
 else:
-    rt.allocation_successful(
+    drett.allocation_successful(
             allocation_id=cloud_measurement_id)
 
 do_something()
 
 service.stop_vm(vm_id)
-rt.resource_freed(
+drett.resource_freed(
         allocation_id=cloud_measurement_id,
         resource_id=vm_id)
 
 service.drop_image(image_id)
-rt.resrouce_freed(
+drett.resrouce_freed(
         allocation_id=cloud_measurement_id,
         resource_id=image_id)

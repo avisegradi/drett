@@ -24,7 +24,7 @@ Files
 -----
 
 Server side:
-- rtserver.py -- CGI script as server. Apache must be configured accordingly.
+- drett\_server.py -- CGI script as server. Apache must be configured accordingly.
 - config.yaml -- main configuration file
 - logging.yaml -- logging configuration
 - mongo.yaml -- MongoDB specific configuration
@@ -32,13 +32,17 @@ Server side:
 - server\_requirements.txt, plugins/mongo\_requirements.txt -- Python requirements
 
 Client side:
-- resourcetracker.py -- A single module containing all services
+- drett.py -- A single module containing all services. This file also contains
+              example/test code.
 - client\_requirements.py -- Client-side Python requirements. This is to be kept
-  as short as possible (currently, it uses only standard libraries).
+                             as short as possible (currently, it uses only standard
+                             libraries).
 
 Misc
 ----
 
 Environment: Python 2.7
+
 License: LGPL 3.0 (client, plugins, libs) and GPL 3.0 (server)
+
 Contact: Adam Visegradi "a.visegradi@gmail.com"

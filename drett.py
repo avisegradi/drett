@@ -18,7 +18,7 @@ import logging
 __dir__ = ['ResourceTracker', 'ArgumentMissingError',
            'Allocation', 'setup']
 
-_log = logging.getLogger('rtclient')
+_log = logging.getLogger('drett_client')
 _default_url = None
 _default_application = None
 _default_module = None
@@ -308,15 +308,18 @@ class Allocation(object):
         return self.resource.freed()
 
 if __name__ == '__main__':
-    import logging.config
     import yaml
+
+    # Logging is only configured if running in standalone mode
+    import logging.config
     with open('logging.yaml') as f:
         logging.config.dictConfig(yaml.load(f))
-
-    _log = logging.getLogger('rtclient')
+    # In this case the logger must be re-created with new configuration
+    _log = logging.getLogger('drett_client')
+    
     _log.info('Starting up')
 
-    setup('http://c153-40.localcloud/cgi-bin/rtserver.py')
+    setup('http://c153-40.localcloud/cgi-bin/drett_server.py')
 
     a = AllocationBlock(application='app:demo', module='module:demo')
     r1 = a.ResourceAllocation('lpds', 'vm')

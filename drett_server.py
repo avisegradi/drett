@@ -22,11 +22,11 @@ import yaml
 
 import logging
 import logging.config
-with open('/etc/rtserver/logging.yaml') as f:
+with open('/etc/drett/logging.yaml') as f:
     logging.config.dictConfig(yaml.load(f))
-logger = logging.getLogger('resource_tracker')
+logger = logging.getLogger('drett_server')
 
-with open('/etc/rtserver/config.yaml') as f:
+with open('/etc/drett/config.yaml') as f:
     cfg = yaml.load(f)
 
 import plugins.command as command
@@ -46,7 +46,7 @@ cmd = command.Command.from_dict(plugin_module, dbconnector, content)
 try:
     retval = cmd.perform()
 except Exception as ex:
-    logger.exception('RTServer critical exception:')
+    logger.exception('Drett server critical exception:')
     response = dict(result=None, error=repr(ex))
 else:
     response = dict(result=retval, error=None)

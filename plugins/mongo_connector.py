@@ -75,6 +75,7 @@ class ResourceAllocated(MongoCommand):
         return self.conn.res_coll.update(
             self.id_data,
             {'$set':{'state':'ALLOCATED',
+                     'resource_id':self.resource_id,
                      'allocation_time':self.arrival_time}})
 @regcmd(MODULE)
 class ResourceAllocationFailed(MongoCommand):

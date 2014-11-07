@@ -164,10 +164,11 @@ class ResourceTracker(object):
                    resource_type=resource_type)
         return self._process_response(self._post(msg))
 
-    def resource_allocated(self, resource_oid):
+    def resource_allocated(self, resource_oid, resource_id):
         """Registers a resource as `allocated'"""
         msg = dict(cmd='ResourceAllocated',
-                   oid=resource_oid)
+                   oid=resource_oid,
+                   resource_id=resource_id)
         return self._process_response(self._post(msg))
 
     def resource_freed(self, resource_oid):
@@ -202,7 +203,7 @@ class ResAlloc(object):
         return self
     def __exit__(self, _type, value, tb):
         if _type is None:
-            self.rt.resource_allocated(self.resource_oid)
+            self.rt.resource_allocated(self.resource_oid, self.resource_id)
         else:
             self.rt.resource_allocation_failed(
                 self.resource_oid, '{0}({1})'.format(_type, value))

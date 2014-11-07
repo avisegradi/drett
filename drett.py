@@ -242,8 +242,7 @@ class AllocationBlock(object):
         return self.rt.allocation_successful(self.allocation_id)
 
     def ResourceAllocation(self, resource_owner=None, resource_type=None):
-        return ResAlloc(
-            self, find_values('resource_owner'), find_values('resource_type'))
+        return ResAlloc(self, resource_owner, resource_type)
 
     def rollback(self):
         pass

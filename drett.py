@@ -322,8 +322,8 @@ if __name__ == '__main__':
 
     setup('http://c153-40.localcloud/cgi-bin/drett_server.py')
 
-    a = AllocationBlock(application='app:demo', module='module:demo')
-    r1 = a.ResourceAllocation('lpds', 'vm')
+    a = AllocationBlock(application='app:demo', module='module:demo', default_resource_owner='lpds')
+    r1 = a.ResourceAllocation(resource_type='vm')
     r2 = a.ResourceAllocation('lpds', 'image')
     _log.debug('Entering allocation block')
     with a: # <- PENDING
@@ -351,11 +351,11 @@ if __name__ == '__main__':
     _log.debug('Freeing resource')
     r1.freed()
 
-    a = Allocation(application='app:demo', module='module:demo',
-                   resource_owner='lpds', resource_type='vm')
-    with a: # Both allocation and a single resource are created PENDING
-        rid = 'imageid_0' # acq. res.
-        # Alloc DONE, res. ALLOCATED (or FAILED+FAILED))
-        a.set_resource_data(rid, data='optional')
-    #free(a.resource)
-    a.freed() # <- Resource: FREED
+    #a = Allocation(application='app:demo', module='module:demo',
+    #               resource_owner='lpds', resource_type='vm')
+    #with a: # Both allocation and a single resource are created PENDING
+    #    rid = 'imageid_0' # acq. res.
+    #    # Alloc DONE, res. ALLOCATED (or FAILED+FAILED))
+    #    a.set_resource_data(rid, data='optional')
+    ##free(a.resource)
+    #a.freed() # <- Resource: FREED

@@ -10,7 +10,7 @@ License: GPLv3.0
 
 __all__ = ['connector', 'BeginAllocation', 'AddResource',
            'AllocationFailed', 'AllocationSuccess',
-           'FreeResource']
+           'ResourceFreed']
 
 MODULE = 'mongo'
 

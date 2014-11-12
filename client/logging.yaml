@@ -1,0 +1,26 @@
+version: 1
+root:
+    level: DEBUG
+    handlers: [stderr]
+formatters:
+    simpleFormatter:
+        format: "%(asctime)s\t%(levelname)s\t%(threadName)s\t%(message)s"
+#        datefmt: '%Y-%m-%d %H:%M:%S.%f'
+
+handlers:
+    stdout:
+        class: logging.StreamHandler
+        formatter: simpleFormatter
+        level: DEBUG
+        stream: ext://sys.stdout
+    stderr:
+        class : logging.StreamHandler
+        formatter: simpleFormatter
+        level: DEBUG
+        stream: ext://sys.stderr
+
+loggers:
+    drett_client:
+        propagate: false
+        level: DEBUG
+        handlers: [stdout]

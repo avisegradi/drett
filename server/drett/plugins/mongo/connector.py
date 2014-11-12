@@ -15,7 +15,7 @@ __all__ = ['connector', 'BeginAllocation', 'AddResource',
 MODULE = 'mongo'
 
 import yaml
-from command import regcmd, Command
+from drett.utils.command import regcmd, Command
 import datetime as dt
 
 import logging

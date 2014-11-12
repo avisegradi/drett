@@ -60,8 +60,9 @@ def perform(content):
     return json.dumps(response)
 
 #content = json.loads(form.file.read())
-app = Flask(__name__)
+flask_config = cfg.get('flask_config', dict())
+app = Flask(__name__, **flask_config.get('init_args', dict()))
 @app.route('/drett', methods=['POST'])
 def handle_post():
     return perform(json.loads(request.data))
-app.run()
+app.run(**flask_config.get('run_args', dict()))

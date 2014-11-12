@@ -1,5 +1,13 @@
 mongo_plugin: &mongo_plugin
     module: mongo
     config: mongo.yaml
+
 plugin: *mongo_plugin
 logconfig: logging.yaml
+flask_config:
+    init_args:
+        instance_path: null
+    run_args:
+        host: 0.0.0.0
+        port: 5001
+        debug: false

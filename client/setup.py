@@ -12,7 +12,7 @@ setuptools.setup(
     author_email='a.visegradi@gmail.com',
     namespace_packages=['drett'],
     packages=['drett.client'],
-    scripts=[],
+    scripts=['drett-client-test'],
     url='https://github.com/avisegradi/drett',
     license='LICENSE.txt',
     description='Distributed Resource Tracking',

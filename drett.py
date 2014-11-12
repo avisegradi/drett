@@ -319,7 +319,8 @@ if __name__ == '__main__':
     
     _log.info('Starting up')
 
-    setup('http://c153-40.localcloud/cgi-bin/drett_server.py')
+    #setup('http://c153-40.localcloud/cgi-bin/drett_server.py')
+    setup('http://localhost:5000/drett')
 
     a = AllocationBlock(application='app:demo', module='module:demo', default_resource_owner='lpds')
     r1 = a.ResourceAllocation(resource_type='vm')

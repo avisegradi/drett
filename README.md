@@ -67,7 +67,7 @@ pip install client
 drett-client-test # Connects to port 5001 on localhost
 ```
 
-To see what's happening, or to tinker with around, take a look at:
+To see what's happening, or to tinker with the client, take a look at:
 - server/testconfig/config.yaml and mongo.yaml
 - client/drett-client-test
 

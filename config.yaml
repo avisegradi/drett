@@ -1,4 +1,5 @@
 mongo_plugin: &mongo_plugin
     module: mongo
-    config: /etc/drett/mongo.yaml
+    config: mongo.yaml
 plugin: *mongo_plugin
+logconfig: logging.yaml

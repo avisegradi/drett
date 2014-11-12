@@ -14,14 +14,27 @@ from flask import Flask, request
 
 import yaml
 
+import sys, os
+cfg_dir = \
+    sys.argv[1] if len(sys.argv) > 1 \
+    else os.path.abspath('.')
+
+def cfgfile(filename):
+    return \
+        filename if os.path.isabs(filename) \
+        else os.path.join(cfg_dir, filename)
+
+main_config = cfgfile('config.yaml')
+with open(main_config) as f:
+    cfg = yaml.load(f)
+
 import logging
 import logging.config
-with open('/etc/drett/logging.yaml') as f:
+with open(cfgfile(cfg['logconfig'])) as f:
     logging.config.dictConfig(yaml.load(f))
 logger = logging.getLogger('drett_server')
 
-with open('/etc/drett/config.yaml') as f:
-    cfg = yaml.load(f)
+logger.info("Using logfile: '%s'", main_config)
 
 import plugins.command as command
 
@@ -29,7 +42,7 @@ import importlib
 plugin_module = cfg['plugin']['module']
 plugin_cfgfile = cfg['plugin']['config']
 db = importlib.import_module('plugins.{0}_connector'.format(plugin_module))
-with open(plugin_cfgfile) as f:
+with open(cfgfile(plugin_cfgfile)) as f:
     plugin_cfg = yaml.load(f)
 dbconnector = db.connector(plugin_cfg)
 

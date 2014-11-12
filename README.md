@@ -23,20 +23,53 @@ database.
 Files
 -----
 
+Server side (server/):
+- drett\_server -- Application server. Uses Flask.
+- drett\_cgi\_server.py -- CGI script as server. Apache must be configured accordingly. !!! Not maintained, probably won't work.
+- drett/utils/command.py -- Abstract command class
+- testconfig/ -- Configuration files for testing and as example
+    - config.yaml -- main configuration file
+    - logging.yaml -- logging configuration
+    - mongo.yaml -- MongoDB specific configuration
+
+MongoDB Connector (drett-mongo/):
+- drett/plugins/mongo/connector.py -- The MongoDB connector implementation
+
+Client side (client/):
+- drett/client/drett.py -- A single module containing all services.
+- drett-client-test -- Test client; configuration is wired in.
+
+Trying
+------
+
+Using [virtualenv](http://virtualenv.readthedocs.org/en/latest/) is highly
+recommended.
+
+You need two terminals, one for the server, one for the client.
+
 Server side:
-- drett\_server.py -- CGI script as server. Apache must be configured accordingly.
-- config.yaml -- main configuration file
-- logging.yaml -- logging configuration
-- mongo.yaml -- MongoDB specific configuration
-- plugins/mongo\_connector.py -- MongoDB connector
-- server\_requirements.txt, plugins/mongo\_requirements.txt -- Python requirements
+
+```bash
+virtualenv dserver
+source dserver/bin/activate
+cd drett
+pip install server
+pip install drett-mongo
+drett_server server/testconfig # Opens port 5001 on localhost
+```
 
 Client side:
-- drett.py -- A single module containing all services. This file also contains
-              example/test code.
-- client\_requirements.py -- Client-side Python requirements. This is to be kept
-                             as short as possible (currently, it uses only standard
-                             libraries).
+```bash
+virtualenv dclient
+source dclient/bin/activate
+cd drett
+pip install client
+drett-client-test # Connects to port 5001 on localhost
+```
+
+To see what's happening, or to tinker with around, take a look at:
+- server/testconfig/config.yaml and mongo.yaml
+- client/drett-client-test
 
 Misc
 ----

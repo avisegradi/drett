@@ -10,12 +10,12 @@ License: GPLv3.0
 
 __all__ = ['connector', 'BeginAllocation', 'AddResource',
            'AllocationFailed', 'AllocationSuccess',
-           'FreeResource']
+           'ResourceFreed']
 
 MODULE = 'mongo'
 
 import yaml
-from command import regcmd, Command
+from drett.utils.command import regcmd, Command
 import datetime as dt
 
 import logging

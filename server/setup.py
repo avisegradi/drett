@@ -10,7 +10,7 @@ setuptools.setup(
     version='0.1.0',
     author='Adam Visegradi',
     author_email='a.visegradi@gmail.com',
-    namespace_packages=['drett', 'drett.plugins'],
+    namespace_packages=['drett'],
     packages=['drett.utils'],
     scripts=['drett_server'],
     url='https://github.com/avisegradi/drett',

@@ -36,12 +36,12 @@ logger = logging.getLogger('drett_server')
 
 logger.info("Using logfile: '%s'", main_config)
 
-import plugins.command as command
+import drett.utils.command as command
 
 import importlib
 plugin_module = cfg['plugin']['module']
 plugin_cfgfile = cfg['plugin']['config']
-db = importlib.import_module('plugins.{0}_connector'.format(plugin_module))
+db = importlib.import_module('drett.plugins.{0}'.format(plugin_module))
 with open(cfgfile(plugin_cfgfile)) as f:
     plugin_cfg = yaml.load(f)
 dbconnector = db.connector(plugin_cfg)

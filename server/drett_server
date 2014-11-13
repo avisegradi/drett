@@ -36,33 +36,39 @@ logger = logging.getLogger('drett_server')
 
 logger.info("Using logfile: '%s'", main_config)
 
-import drett.utils.command as command
+try:
+    import drett.utils.command as command
 
-import importlib
-plugin_module = cfg['plugin']['module']
-plugin_cfgfile = cfg['plugin']['config']
-db = importlib.import_module('drett.plugins.{0}'.format(plugin_module))
-with open(cfgfile(plugin_cfgfile)) as f:
-    plugin_cfg = yaml.load(f)
-dbconnector = db.connector(plugin_cfg)
+    import importlib
+    plugin_module = cfg['plugin']['module']
+    plugin_cfgfile = cfg['plugin']['config']
+    db = importlib.import_module('drett.plugins.{0}'.format(plugin_module))
+    with open(cfgfile(plugin_cfgfile)) as f:
+        plugin_cfg = yaml.load(f)
+    dbconnector = db.connector(plugin_cfg)
 
-import bson.json_util as json
+    import bson.json_util as json
 
-def perform(content):
-    cmd = command.Command.from_dict(plugin_module, dbconnector, content)
-    try:
-        retval = cmd.perform()
-    except Exception as ex:
-        logger.exception('Drett server critical exception:')
-        response = dict(result=None, error=repr(ex))
-    else:
-        response = dict(result=retval, error=None)
-    return json.dumps(response)
+    def perform(content):
+        cmd = command.Command.from_dict(plugin_module, dbconnector, content)
+        try:
+            retval = cmd.perform()
+        except Exception as ex:
+            logger.exception('Drett server critical exception:')
+            response = dict(result=None, error=repr(ex))
+        else:
+            response = dict(result=retval, error=None)
+        return json.dumps(response)
 
-#content = json.loads(form.file.read())
-flask_config = cfg.get('flask_config', dict())
-app = Flask(__name__, **flask_config.get('init_args', dict()))
-@app.route('/drett', methods=['POST'])
-def handle_post():
-    return perform(json.loads(request.data))
-app.run(**flask_config.get('run_args', dict()))
+    #content = json.loads(form.file.read())
+    flask_config = cfg.get('flask_config', dict())
+    app = Flask(__name__, **flask_config.get('init_args', dict()))
+    @app.route('/drett', methods=['POST'])
+    def handle_post():
+        return perform(json.loads(request.data))
+    app.run(**flask_config.get('run_args', dict()))
+except KeyboardInterrupt:
+    log.info('Ctrl-C Exiting.')
+except BaseException:
+    log.exception('Unhandled exception:')
+    exit(1)

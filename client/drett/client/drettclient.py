@@ -291,6 +291,8 @@ class Allocation(object):
         except Exception as ex:
             self.alloc_block.__exit__(type(ex), ex.args)
             raise
+        else:
+            return self
     def __exit__(self, _type, value, tb):
         try:
             self.resource.__exit__(_type, value, tb)

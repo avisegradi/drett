@@ -193,6 +193,7 @@ class ResAlloc(object):
     def set_resource_data(self, resource_id, data=None):
         self.resource_id = resource_id
         self.data = data
+        return self.resource_oid
     def freed(self):
         self.rt.resource_freed(self.resource_oid)
     def __enter__(self):

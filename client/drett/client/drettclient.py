@@ -184,6 +184,15 @@ class ResourceTracker(object):
                    reason=reason)
         return self._process_response(self._post(msg))
 
+    def resource_freed_by_attributes(self, resource_owner, resource_type, resource_id):
+        """Same as resource_freed, but identifies the resource
+           with its attributes."""
+        msg = dict(cmd='ResourceFreedByAttributes',
+                   resource_owner=resource_owner,
+                   resource_type=resource_type,
+                   resource_id=resource_id)
+        return self._process_response(self._post(msg))
+
 class ResAlloc(object):
     def __init__(self, alloc_block, resource_owner, resource_type):
         self.alloc_block = alloc_block

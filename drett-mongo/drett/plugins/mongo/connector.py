@@ -92,3 +92,13 @@ class ResourceFreed(MongoCommand):
             self.id_data,
             {'$set':{'state':'FREE',
                      'close_time':self.arrival_time}})
+
+@regcmd(MODULE)
+class ResourceFreedByAttributes(MongoCommand):
+    def perform(self):
+        return self.conn.res_coll.update(
+            dict(owner=self.resource_owner,
+                 type=self.resource_type,
+                 resource_id=self.resource_id),
+            {'$set':{'state':'FREE',
+                     'close_time':self.arrival_time}})

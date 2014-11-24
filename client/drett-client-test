@@ -62,3 +62,15 @@ with a: # Both allocation and a single resource are created PENDING
     a.set_resource_data(rid, data='optional')
 #free(a.resource)
 a.freed() # <- Resource: FREED
+
+a = Allocation(application='app:demo', module='module:demo',
+               resource_owner='lpds', resource_type='vm')
+with a: # Both allocation and a single resource are created PENDING
+    rid = 'imageid_abc' # acq. res.
+    # Alloc DONE, res. ALLOCATED (or FAILED+FAILED))
+    a.set_resource_data(rid, data='optional')
+#free(a.resource)
+res = ResourceTracker()
+res.resource_freed_by_attributes(resource_owner='lpds',
+                                 resource_type='vm',
+                                 resource_id=rid)

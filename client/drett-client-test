@@ -23,7 +23,7 @@ _log = logging.getLogger('drett_client')
 _log.info('Starting up')
 
 #setup('http://c153-40.localcloud/cgi-bin/drett_server.py')
-setup('http://localhost:5001/drett')
+setup('http://localhost:5003/drett')
 
 a = AllocationBlock(application='app:demo', module='module:demo', default_resource_owner='lpds')
 r1 = a.ResourceAllocation(resource_type='vm')
